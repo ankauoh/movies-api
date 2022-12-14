@@ -37,23 +37,14 @@ let topMovies = [
   },
 ];
 
-
-app.get('/', (req, res) => {
-  res.send('These are some movies I like.');
-});
-
-app.get('/movies', (req, res) => {
-  res.json(topMovies);
-});
-
-app.use(express.static('public'));
-
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), { flags: 'a' })
 
 app.use(morgan('combined', { stream: accessLogStream }));
 
-app.get('/', (req, res) => {
-  res.send('Welcome to my app!');
+app.use(express.static('public'));
+
+app.get('/movies', (req, res) => {
+  res.json(topMovies);
 });
 
 app.get('/secreturl', (req, res) => {
