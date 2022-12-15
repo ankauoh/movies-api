@@ -43,6 +43,10 @@ app.use(morgan('combined', { stream: accessLogStream }));
 
 app.use(express.static('public'));
 
+app.get('/', (req, res) => {
+  res.send("These are movies I like.");
+});
+
 app.get('/movies', (req, res) => {
   res.json(topMovies);
 });
