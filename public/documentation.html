@@ -1,9 +1,136 @@
 //Favorites Movies API
 
-<!-- movies_api is a Rest APi constructed in NODE.js to provide infofrmation
-to the user upon request to the server. The program is written in js, json, and html.
-The aim of this achievemnet is to learn how to use node on serverside development, and to get practive using the terminal-->
+<!DOCTYPE html>
+<html lang="en">
 
-<!-- as a server side project, user experience will not be foregrounded, though the aim is of course to be as user friendly and accessible as possible. 
-  the bigger aim is to make the js files as readable and the modules as reusable as possible, so that I and other developers
-  can understand and reuse the code.-->
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentation</title>
+  <link rel="stylesheet" type="text/css" href="../css/style.css">
+</head>
+
+<body>
+  <header> Movie API Documentation
+  </header>
+  <div>
+    <p> movies_api is a Rest APi constructed in NODE.js to provide infofrmation
+      to the user upon request to the server. The program is written in js, json, and html.
+      The aim of this achievemnet is to learn how to use node on serverside development, and to get practive using the
+      terminal-->
+    </p>
+    <p>
+      as a server side project, user experience will not be foregrounded, though the aim is of course to be as user
+      friendly and accessible as possible.
+      the bigger aim is to make the js files as readable and the modules as reusable as possible, so that I and other
+      developers
+      can understand and reuse the code.-->
+    </p>
+    <ol>
+      <li> Return a list of ALL movies to the user</li>
+      <li> Return data (description, genre, director, image URL, whether it’s featured or not) about a single movie by
+        title to the user</li>
+      <li> Return data about a genre (description) by name/title (e.g., “Thriller”)</li>
+      <li> Return data about a director (bio, birth year, death year) by name</li>
+      <li> Allow new users to register</li>
+      <li> Allow users to update their user info (username)</li>
+      <li> Allow users to add a movie to their list of favorites (showing only a text that a movie has been added—more
+        on this later)</li>
+      <li> Allow users to remove a movie from their list of favorites (showing only a text that a movie has been
+        removed—more on this later)</li>
+      <li> Allow existing users to deregister (showing only a text that a user email has been removed—more on this
+        later)</li>
+    </ol>
+  </div>
+
+  <h2> Endpoints </h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Business Logic</th>
+        <th> URL extension </th>
+        <th> Method </th>
+        <th> Request </th>
+        <th> Response </th>
+      <tr>
+    </thead>
+
+    <tbody>
+      <td>get movies</td>
+      <td>/movies</td>
+      <td>GET</td>
+      <td>-</td>
+      <td>JSON object with data for all movies</td>
+      </tr>
+
+      <tr>
+        <td>get a single movie via the title</td>
+        <td>/movies/:title</td>
+        <td>GET</td>
+        <td>-</td>
+        <td>JSON object holding data about a single movie
+        <td>
+      </tr>
+
+      <tr>
+        <td>Get Genre by name</td>
+        <td>/movies/genre/:Name</td>
+        <td>GET</td>
+        <td>-</td>
+        <td>JSON object holding data about the genre of a movie</td>
+      </tr>
+
+      <tr>
+        <td>Get director data by name</td>
+        <td>/movies/director/:Name</td>
+        <td>GET</td>
+        <td>-</td>
+        <td>A JSON object holding data about the data of a director</td>
+      </tr>
+
+      <tr>
+        <td>Allow new users to register</td>
+        <td>/users</td>
+        <td>POST</td>
+        <td> JSON object holding data about the user {"name" : "Vincent", "Password" : "XXXX", "Email":
+          "name@email.example"} ID added via UUID </td>
+      </tr>
+
+      <tr>
+        <td>Allow users to update their info</td>
+        <td>/users/:Username</td>
+        <td>PUT</td>
+        <td>-</td>
+        <td>JSON object holding data about updated info</td>
+      </tr>
+
+      <tr>
+        <td>Adds movie to favorite list </td>
+        <td>/users/:Username/movies/:MovieID</td>
+        <td>POST</td>
+        <td>-</td>
+        <td>JSON object holding data about the user and the movie that was added</td>
+      </tr>
+
+      <tr>
+        <td>Delete movies from favorite list</td>
+        <td>/users/:Username/movies/:MovieID</td>
+        <td>DELETE</td>
+        <td>-
+        <td>
+        <td>JSON object holding data about the user and the movies that was removed</td>
+      </tr>
+
+      <tr>
+        <td>Allow existing users to deregister</td>
+        <td>/users/:Username</td>
+        <td>DELETE</td>
+        <td>-</td>
+        <td>A message indicating whether the user has deregistered</td>
+      </tr>
+    <tbody>
+  </table>
+</body>
+
+</html>
