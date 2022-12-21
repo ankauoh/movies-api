@@ -57,17 +57,17 @@ app.get('/movies', (req, res) => {
 });
 
 //get a movie via the title
-app.get('/movies/:title/', (req, res) => {
-  res.json(movies.find((movie) => { return movie.title === req.params.title }));
+app.get('/movies/:Title/', (req, res) => {
+  res.json(topMovies.find((movie) => { return movie.Title === req.params.title }));
 });
 
 //get genre by name
-app.get('/movies/genre/:Name', (req, res) => {
+app.get('/movies/genres/:Name', (req, res) => {
   res.json('request with genre Name parameter, and return the data for the genre');
 });
 
 //get director by name
-app.get('.movies/directors/:Name', (req, res) => {
+app.get('/movies/directors/:Name', (req, res) => {
   res.json('request with director name parameter, and return the data for the director');
 });
 

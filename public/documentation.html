@@ -57,16 +57,17 @@
     </thead>
 
     <tbody>
-      <td>get movies</td>
-      <td>/movies</td>
-      <td>GET</td>
-      <td>-</td>
-      <td>JSON object with data for all movies</td>
+      <tr>
+        <td>get movies</td>
+        <td>/movies</td>
+        <td>GET</td>
+        <td>-</td>
+        <td>JSON Array with data for all movies</td>
       </tr>
 
       <tr>
         <td>get a single movie via the title</td>
-        <td>/movies/:title</td>
+        <td>/movies/:Title</td>
         <td>GET</td>
         <td>-</td>
         <td>JSON object holding data about a single movie
@@ -75,7 +76,7 @@
 
       <tr>
         <td>Get Genre by name</td>
-        <td>/movies/genre/:Name</td>
+        <td>/movies/genres/:Name</td>
         <td>GET</td>
         <td>-</td>
         <td>JSON object holding data about the genre of a movie</td>
@@ -83,7 +84,7 @@
 
       <tr>
         <td>Get director data by name</td>
-        <td>/movies/director/:Name</td>
+        <td>/movies/directors/:Name</td>
         <td>GET</td>
         <td>-</td>
         <td>A JSON object holding data about the data of a director</td>
@@ -95,6 +96,7 @@
         <td>POST</td>
         <td> JSON object holding data about the user {"name" : "Vincent", "Password" : "XXXX", "Email":
           "name@email.example"} ID added via UUID </td>
+        <td> JSON object containing the new user info </td>
       </tr>
 
       <tr>
