@@ -140,7 +140,7 @@ app.post('/users', (req, res) => {
   (required)
   Birthday: Date
 }*/
-app.put('/username/:Username', (req, res) => {
+app.put('/users/:Username', (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.Username }, {
     $set:
     {
@@ -181,7 +181,7 @@ app.post('/users/:Username/movies/:MovieID', (req, res) => {
 //delete movie from favorite list
 app.delete('/users/:Username/movies/:MovieID', (req, res) => {
   Models.User.findOneAndUpdate({ Username: req.params.Username }, {
-    $pull: { FavoriteMovies: re.params.MovieID }
+    $pull: { FavoriteMovies: req.params.MovieID }
   },
     { new: true },
     (err, updatedUser) => {
@@ -189,7 +189,7 @@ app.delete('/users/:Username/movies/:MovieID', (req, res) => {
         console.error(err);
         res.status(500).send('Error: ' + err);
       } else {
-        res.json(updateUser);
+        res.json(updatedUser);
       }
     });
 });
