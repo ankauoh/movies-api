@@ -51,6 +51,7 @@
         <th>Business Logic</th>
         <th> URL extension </th>
         <th> Method </th>
+        <th> Query Parameters </th>
         <th> Request </th>
         <th> Response </th>
       <tr>
@@ -58,34 +59,54 @@
 
     <tbody>
       <tr>
-        <td>get movies</td>
+        <td>get all movies</td>
         <td>/movies</td>
         <td>GET</td>
         <td>-</td>
-        <td>JSON Array with data for all movies</td>
+        <td>-</td>
+        <td>JSON array holding data of all movies</td>
       </tr>
 
       <tr>
         <td>get a single movie via the title</td>
         <td>/movies/:Title</td>
         <td>GET</td>
+        <td>:Title</td>
         <td>-</td>
-        <td>JSON object holding data about a single movie
-        <td>
+        <td>JSON object holding data about a single movie</td>
       </tr>
 
       <tr>
         <td>Get Genre by name</td>
         <td>/movies/genres/:Name</td>
         <td>GET</td>
+        <td>:genreName</td>
         <td>-</td>
         <td>JSON object holding data about the genre of a movie</td>
       </tr>
 
       <tr>
+        <td>Get all Users</td>
+        <td>/users</td>
+        <td>GET</td>
+        <td>-</td>
+        <td>-</td>
+        <td>JSON array holding all data about users</td>
+      </tr>
+
+      <tr>
+        <td>Get a user by Username</td>
+        <td>/users/:Username</td>
+        <td>GET</td>
+        <td>:Username</td>
+        <td>-</td>
+        <td>JSON object holding data about the single user</td>
+
+      <tr>
         <td>Get director data by name</td>
         <td>/movies/directors/:Name</td>
         <td>GET</td>
+        <td>:directorName</td>
         <td>-</td>
         <td>A JSON object holding data about the data of a director</td>
       </tr>
@@ -94,16 +115,22 @@
         <td>Allow new users to register</td>
         <td>/users</td>
         <td>POST</td>
-        <td> JSON object holding data about the user {"name" : "Vincent", "Password" : "XXXX", "Email":
-          "name@email.example"} ID added via UUID </td>
-        <td> JSON object containing the new user info </td>
+        <td>-</td>
+        <td> JSON object holding data about the user structured like so - {"Username" : "String", "Password" : "String",
+          "Email":
+          "String", "Birthday" : "Date"} </td>
+        <!-- DATE is written as "yyyy-mm-dd"-->
+        <td> JSON object containing the new user info just added, structured as follows - {"Username" : "String",
+          "Password" : "String", "Email":
+          "String", "Birthday" : "Date", "favoriteMovie" : "stringArray"} UserID added via UUID </td>
       </tr>
 
       <tr>
         <td>Allow users to update their info</td>
         <td>/users/:Username</td>
         <td>PUT</td>
-        <td>-</td>
+        <td>:Username</td>
+        <td>JSON object containing the updates info</td>
         <td>JSON object holding data about updated info</td>
       </tr>
 
@@ -111,6 +138,7 @@
         <td>Adds movie to favorite list </td>
         <td>/users/:Username/movies/:MovieID</td>
         <td>POST</td>
+        <td>:Username, :MovieID</td>
         <td>-</td>
         <td>JSON object holding data about the user and the movie that was added</td>
       </tr>
@@ -119,8 +147,8 @@
         <td>Delete movies from favorite list</td>
         <td>/users/:Username/movies/:MovieID</td>
         <td>DELETE</td>
-        <td>-
-        <td>
+        <td>:Username, :MovieID</td>
+        <td>-</td>
         <td>JSON object holding data about the user and the movies that was removed</td>
       </tr>
 
@@ -128,6 +156,7 @@
         <td>Allow existing users to deregister</td>
         <td>/users/:Username</td>
         <td>DELETE</td>
+        <td>:Username</td>
         <td>-</td>
         <td>A message indicating whether the user has deregistered</td>
       </tr>

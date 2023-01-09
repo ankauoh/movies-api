@@ -11,7 +11,7 @@ const Movies = Models.Movie;
 const Users = Models.User;
 const app = express();
 
-mongoose.connect('mongodb://localhost:27017//myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
 
 
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), { flags: 'a' })
@@ -27,22 +27,52 @@ app.get('/', (req, res) => {
 
 //get all movies
 app.get('/movies', (req, res) => {
-  res.json('GET request returns data about all movies');
+  Movies.find()
+    .then((movies) => {
+      res.status(201).json(movies);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
 });
+
+
 
 //get a movie via the title
 app.get('/movies/:Title', (req, res) => {
-  res.json(topMovies.find((movie) => { return movie.Title === req.params.title }));
+  Movies.findOne({ Title: req.params.Title })
+    .then((movie) => {
+      res.json(movie);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).sendStatus('Error: ' + err);
+    });
 });
 
 //get genre by name
 app.get('/movies/genres/:Name', (req, res) => {
-  res.json('request with genre Name parameter, and return the data for the genre');
+  Movies.findOne({ 'Genre.Name': req.params.Name })
+    .then((movies) => {
+      res.send(movies.Genre);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
 });
 
 //get director by name
 app.get('/movies/directors/:Name', (req, res) => {
-  res.json('request with director name parameter, and return the data for the director');
+  Movies.findOne({ 'Director.Name': req.params.Name })
+    .then((movies) => {
+      res.send(movies.Director);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
 });
 
 //get all users
@@ -99,23 +129,17 @@ app.post('/users', (req, res) => {
     });
 });
 
-//post a favorite movie to a user's favorite list
-app.post('/users/:Username/movies/:MovieID', (req, res) => {
-  Users.findOneAndUpdate({ Username: req.params.Username }, {
-    $push: { FavoriteMovies: ReadableStreamBYOBRequest.params.MovieID }
-  },
-    { new: true },
-    (err, updatedUser) => {
-      if (err) {
-        console.error(err);
-        res.status(500).send('Error: ' + err);
-      } else {
-        res.json(updatedUser);
-      }
-    });
-});
-
-
+// Update a user's info, by username
+/* We’ll expect JSON in this format
+{
+  Username: String,
+  (required)
+  Password: String,
+  (required)
+  Email: String,
+  (required)
+  Birthday: Date
+}*/
 app.put('/username/:Username', (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.Username }, {
     $set:
@@ -137,21 +161,39 @@ app.put('/username/:Username', (req, res) => {
     });
 });
 
-
-//update user info
-app.put('/users/:Username', (req, res) => {
-  res.json('send parameters for updated info, and respond with a success message');
-});
-
-//Allow users to add a movie to their favorites list
+//post a favorite movie to a user's favorite list
 app.post('/users/:Username/movies/:MovieID', (req, res) => {
-  res.json('send info about the movie, respond with a success message');
+  Users.findOneAndUpdate({ Username: req.params.Username }, {
+    $push: { FavoriteMovies: req.params.MovieID }
+  },
+    { new: true },
+    (err, updatedUser) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+      } else {
+        res.json(updatedUser);
+      }
+    });
 });
+
 
 //delete movie from favorite list
 app.delete('/users/:Username/movies/:MovieID', (req, res) => {
-  res.json('send info about the movie to be removed, respond with a success message');
+  Models.User.findOneAndUpdate({ Username: req.params.Username }, {
+    $pull: { FavoriteMovies: re.params.MovieID }
+  },
+    { new: true },
+    (err, updatedUser) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+      } else {
+        res.json(updateUser);
+      }
+    });
 });
+
 
 //deregister a user
 
