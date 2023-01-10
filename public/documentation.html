@@ -31,6 +31,8 @@
       <li> Return a list of ALL movies to the user</li>
       <li> Return data (description, genre, director, image URL, whether it’s featured or not) about a single movie by
         title to the user</li>
+      <li> Return list of all Users</li>
+      <li> Return data about a single user by Username</li>
       <li> Return data about a genre (description) by name/title (e.g., “Thriller”)</li>
       <li> Return data about a director (bio, birth year, death year) by name</li>
       <li> Allow new users to register</li>
@@ -41,6 +43,7 @@
         removed—more on this later)</li>
       <li> Allow existing users to deregister (showing only a text that a user email has been removed—more on this
         later)</li>
+
     </ol>
   </div>
 
@@ -73,7 +76,31 @@
         <td>GET</td>
         <td>:Title</td>
         <td>-</td>
-        <td>JSON object holding data about a single movie</td>
+        <td>
+          <p>JSON object holding data about a single movie</p>
+          <pre>
+          <code>
+            {
+              "Genre": {
+                  "Name": "Sci-Fi Drama",
+                  "Description": "A drama that uses speculative, fictional science-based depictions of phenomena that are not fully accepted by mainstream science."
+              },
+              "Director": {
+                  "Name": "Andrei Tarkovsky",
+                  "Bio": "Andrei Tarkovsky was a Russian filmmaker. Widely considered one of the most influential directors of all time, his films explore spiritual and metaphysical themes, and are noted for their slow pacing and long takes, dreamlike visual imagery, and preoccupation with nature and memory.",
+                  "Birth": "1932",
+                  "Death": "1986"
+              },
+              "Actors": [],
+              "_id": "63a5c6b51e64b5a95d900aab",
+              "Title": "Solaris",
+              "Description": "The plot centers on a space station orbiting the fictional planet Solaris, where a scientific mission has stalled because the skeleton crew of three scientists have fallen into emotional crises.",
+              "ImagePath": "none",
+              "Featured": false
+          }
+          </code>
+        </pre>
+        </td>
       </tr>
 
       <tr>
@@ -82,7 +109,17 @@
         <td>GET</td>
         <td>:genreName</td>
         <td>-</td>
-        <td>JSON object holding data about the genre of a movie</td>
+        <td>
+          <p>JSON object holding data about the genre of a movie</p>
+          <pre>
+            <code>
+              {
+                "Name": "Art Film",
+                "Description": "An art film is typically an independent film, aimed at a niche market rather than a mass market audience. It is intended to be a serious, artistic work, often experimental and not designed for mass appeal, made primarily for aesthetic reasons rather than commercial profit."
+            }
+          </code>
+        </pre>
+        </td>
       </tr>
 
       <tr>
@@ -91,7 +128,33 @@
         <td>GET</td>
         <td>-</td>
         <td>-</td>
-        <td>JSON array holding all data about users</td>
+        <td>
+          <p>JSON array holding all data about users</p>
+          <pre>
+            <code>
+              {
+                "_id": "63a5cbe71e64b5a95d900ab0",
+                "Password": "erty",
+                "Email": "email@mail.com",
+                "Birthday": "1986-03-19T00:00:00.000Z",
+                "FavoriteMovies": [
+                    "63a5ca1b1e64b5a95d900aad"
+                ],
+                "Username": "max1"
+            },
+            {
+                "_id": "63a5cde01e64b5a95d900ab1",
+                "Password": "wci",
+                "Email": "may@mail.net",
+                "Birthday": "2003-12-05T00:00:00.000Z",
+                "FavoriteMovies": [
+                    "63a5c6b51e64b5a95d900aab"
+                ],
+                "Username": "may3"
+            }
+          </code>
+          </pre>
+        </td>
       </tr>
 
       <tr>
@@ -100,7 +163,23 @@
         <td>GET</td>
         <td>:Username</td>
         <td>-</td>
-        <td>JSON object holding data about the single user</td>
+        <td>
+          <p>JSON object holding data about the single user</p>
+          <pre>
+            <code>
+              {
+                "_id": "63bc91e26cbf219a28392680",
+                "Username": "testname",
+                "Password": "test",
+                "Email": "email@mail.com",
+                "Birthday": "1993-08-08T22:00:00.000Z",
+                "FavoriteMovies": [],
+                "__v": 0
+            }
+          </code>
+        </pre>
+        </td>
+      </tr>
 
       <tr>
         <td>Get director data by name</td>
@@ -108,7 +187,19 @@
         <td>GET</td>
         <td>:directorName</td>
         <td>-</td>
-        <td>A JSON object holding data about the data of a director</td>
+        <td>
+          <p>A JSON object holding data about the data of a director</p>
+          <pre>
+          <code>
+            {
+              "Name": "Ron Howard",
+              "Bio": "He is an American director, producer, screenwriter, and actor.",
+              "Birth": "1954",
+              "Death": "-"
+          }
+          </code>
+        </pre>
+        </td>
       </tr>
 
       <tr>
@@ -116,13 +207,37 @@
         <td>/users</td>
         <td>POST</td>
         <td>-</td>
-        <td> JSON object holding data about the user structured like so - {"Username" : "String", "Password" : "String",
-          "Email":
-          "String", "Birthday" : "Date"} </td>
+        <td>
+          <p>JSON object holding data about the user</p>
+          <pre>
+          <code>
+            {
+              "Username" : "testname",
+              "Password" : "test",
+              "Email" : "email@mail.com",
+              "Birthday" : "1993/08/09"
+            }
+        </code>
+      </pre>
+        </td>
         <!-- DATE is written as "yyyy-mm-dd"-->
-        <td> JSON object containing the new user info just added, structured as follows - {"Username" : "String",
-          "Password" : "String", "Email":
-          "String", "Birthday" : "Date", "favoriteMovie" : "stringArray"} UserID added via UUID </td>
+        <td>
+          <p>JSON object containing the new user info just added
+          <p>
+          <pre>
+              <code>
+                {
+                  "Username": "testname",
+                  "Password": "test",
+                  "Email": "email@mail.com",
+                  "Birthday": "1993-08-08T22:00:00.000Z",
+                  "FavoriteMovies": [],
+                  "_id": "63bd2c1a0dd98d34efd6df6b",
+                  "__v": 0
+              }
+            </code>
+          </pre>
+        </td>
       </tr>
 
       <tr>
@@ -130,8 +245,35 @@
         <td>/users/:Username</td>
         <td>PUT</td>
         <td>:Username</td>
-        <td>JSON object containing the updates info</td>
-        <td>JSON object holding data about updated info</td>
+        <td>
+          <p>JSON object containing the updated info</p>
+          <pre>
+          <code>
+            {
+              "Username" : "testname",
+              "Password" : "bb",
+              "Email" : "email@mail.com",
+              "Birthday" : "1993/08/09"
+            }
+          </code>
+        </pre>
+        </td>
+        <td>
+          <p>JSON object holding data about updated info</p>
+          <pre>
+          <code>
+          {
+            "_id": "63bd2c1a0dd98d34efd6df6b",
+            "Username": "testname",
+            "Password": "bb",
+            "Email": "email@mail.com",
+            "Birthday": "1993-08-08T22:00:00.000Z",
+            "FavoriteMovies": [],
+            "__v": 0
+          }
+          </code>
+        </pre>
+        </td>
       </tr>
 
       <tr>
@@ -140,7 +282,22 @@
         <td>POST</td>
         <td>:Username, :MovieID</td>
         <td>-</td>
-        <td>JSON object holding data about the user and the movie that was added</td>
+        <td>
+          <p>JSON object holding data about the user and the movie that was added</p>
+          <pre>
+          <code>
+            {
+              "_id": "63bd2c1a0dd98d34efd6df6b",
+              "Username": "testname",
+              "Password": "bb",
+              "Email": "email@mail.com",
+              "Birthday": "1993-08-08T22:00:00.000Z",
+              "FavoriteMovies": [
+                "63a5c6b51e64b5a95d900aab"
+               ],
+                "__v": 0
+             }
+        </td>
       </tr>
 
       <tr>
@@ -149,7 +306,22 @@
         <td>DELETE</td>
         <td>:Username, :MovieID</td>
         <td>-</td>
-        <td>JSON object holding data about the user and the movies that was removed</td>
+        <td>
+          <p>JSON object holding data about the user and the movies that was removed</p>
+        <pre>
+          <code>
+            {
+              "_id": "63bd2c1a0dd98d34efd6df6b",
+              "Username": "testname",
+              "Password": "bb",
+              "Email": "email@mail.com",
+              "Birthday": "1993-08-08T22:00:00.000Z",
+              "FavoriteMovies": [],
+              "__v": 0
+          }
+          </code>
+        </pre>
+        </td>
       </tr>
 
       <tr>
@@ -158,7 +330,14 @@
         <td>DELETE</td>
         <td>:Username</td>
         <td>-</td>
-        <td>A message indicating whether the user has deregistered</td>
+        <td>
+          <p>A message indicating whether the user has deregistered</p>
+          <pre>
+          <code>
+            "testname was deleted."
+          </code>
+        </pre>
+        </td>
       </tr>
     <tbody>
   </table>
