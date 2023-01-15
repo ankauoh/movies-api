@@ -43,6 +43,7 @@
         removed—more on this later)</li>
       <li> Allow existing users to deregister (showing only a text that a user email has been removed—more on this
         later)</li>
+      <li> login </li>
 
     </ol>
   </div>
@@ -57,6 +58,7 @@
         <th> Query Parameters </th>
         <th> Request </th>
         <th> Response </th>
+        <th> Authentication </th>
       <tr>
     </thead>
 
@@ -68,6 +70,7 @@
         <td>-</td>
         <td>-</td>
         <td>JSON array holding data of all movies</td>
+        <td> JWT Token (Bearer)</td>
       </tr>
 
       <tr>
@@ -101,6 +104,7 @@
           </code>
         </pre>
         </td>
+        <td> JWT Token (Bearer)</td>
       </tr>
 
       <tr>
@@ -120,6 +124,7 @@
           </code>
         </pre>
         </td>
+        <td> JWT Token (Bearer)</td>
       </tr>
 
       <tr>
@@ -155,6 +160,7 @@
           </code>
           </pre>
         </td>
+        <td> JWT Token (Bearer)</td>
       </tr>
 
       <tr>
@@ -179,6 +185,7 @@
           </code>
         </pre>
         </td>
+        <td> JWT Token (Bearer)</td>
       </tr>
 
       <tr>
@@ -200,6 +207,7 @@
           </code>
         </pre>
         </td>
+        <td> JWT Token (Bearer)</td>
       </tr>
 
       <tr>
@@ -238,6 +246,7 @@
             </code>
           </pre>
         </td>
+        <td> none </td>
       </tr>
 
       <tr>
@@ -274,6 +283,7 @@
           </code>
         </pre>
         </td>
+        <td> JWT Token (Bearer)</td>
       </tr>
 
       <tr>
@@ -298,6 +308,7 @@
                 "__v": 0
              }
         </td>
+        <td> JWT Token (Bearer)</td>
       </tr>
 
       <tr>
@@ -322,6 +333,7 @@
           </code>
         </pre>
         </td>
+        <td> JWT Token (Bearer)</td>
       </tr>
 
       <tr>
@@ -338,6 +350,52 @@
           </code>
         </pre>
         </td>
+        <td> JWT Token (Bearer)</td>
+      </tr>
+
+      <tr>
+        <td>Login using Username and Password</td>
+        <td>/login</td>
+        <td>Post</td>
+        <td>-</td>
+        <td>
+          <p> in <b>Params</p>
+          <pre>
+              <code>
+                Key: Username   |    Value: "username"
+                Key: Password   |    Value: "password"
+              </code>
+            </pre>
+          <p> in <b>Body</b></p>
+          <pre>
+            <code>
+              {
+                "Username" : "newbie",
+                "Password" : "hhh"
+              }
+            </code>
+          </pre>
+        </td>
+        <td>
+          <p> JSON object holding data about the user, including the Token</p>
+          <pre>
+          <code>
+            {
+              "user": {
+                  "_id": "63c4091e486c298d29e0ae60",
+                  "Username": "newbie",
+                  "Password": "hhh",
+                  "Email": "newbie@gmail.com",
+                  "Birthday": "1954-11-30T23:00:00.000Z",
+                  "FavoriteMovies": [],
+                  "__v": 0
+              },
+              "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2M0MDkxZTQ4NmMyOThkMjllMGFlNjAiLCJVc2VybmFtZSI6Im5ld2JpZSIsIlBhc3N3b3JkIjoiaGhoIiwiRW1haWwiOiJuZXdiaWVAZ21haWwuY29tIiwiQmlydGhkYXkiOiIxOTU0LTExLTMwVDIzOjAwOjAwLjAwMFoiLCJGYXZvcml0ZU1vdmllcyI6W10sIl9fdiI6MCwiaWF0IjoxNjczNzkxNzk4LCJleHAiOjE2NzQzOTY1OTgsInN1YiI6Im5ld2JpZSJ9.-E36fLShQ4ajIH5PkJS4lxGMeihJI9klNAgde5jwY3M"
+          }
+        </code>
+      </pre>
+        </td>
+        <td>Basic HTTP Authentication using Username and Password</td>
       </tr>
     <tbody>
   </table>
